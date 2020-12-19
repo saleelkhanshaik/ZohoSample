@@ -14,6 +14,6 @@ interface CountryDao {
     @Query("SELECT * FROM countrydetails")
     suspend fun getAll():List<CountryDetails>
 
-    @Query("SELECT * FROM countrydetails WHERE name = :name")
-    fun loadAllBySegKey(name:String):List<CountryDetails>
+    @Query("SELECT * FROM countrydetails WHERE name LIKE:name")
+    suspend fun loadByName(name:String):List<CountryDetails>
 }

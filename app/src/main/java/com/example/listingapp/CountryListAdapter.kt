@@ -2,11 +2,13 @@ package com.example.listingapp
 
 import android.content.Context
 import android.media.Image
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.widget.AppCompatImageView
 import androidx.recyclerview.widget.RecyclerView
 import coil.Coil
 import coil.ImageLoader
@@ -15,9 +17,11 @@ import coil.load
 import com.example.listingapp.model.CountryDetails
 import kotlinx.android.synthetic.main.countrylistitem.view.*
 
-class CountryListAdapter(private val context:Context,private val coutryList:List<CountryDetails>):RecyclerView.Adapter<CountryListAdapter.ChildHolder>() {
+class CountryListAdapter(private val context:Context,
+                         private val coutryList:List<CountryDetails>,
+                        private val onItemClick:ItemClick):RecyclerView.Adapter<CountryListAdapter.ChildHolder>() {
     class ChildHolder(view:View):RecyclerView.ViewHolder(view){
-        val thumbnail = view.thumbnail as ImageView
+        val thumbnail = view.thumbnail as AppCompatImageView
         val title = view.title  as TextView
     }
 
@@ -33,10 +37,20 @@ class CountryListAdapter(private val context:Context,private val coutryList:List
         val response = coutryList[position]
         holder.title.text = response.name
 
+
+
+//            holder.thumbnail.load("https://restcountries.eu/data/aut.svg")
+
         val imageLoader = ImageLoader.Builder(context).componentRegistry {
             add(SvgDecoder(context))
         }.build()
         Coil.setImageLoader(imageLoader)
-        holder.thumbnail.load(response.flag)
+        if(!response.flag!!.contains("aut")){
+            holder.thumbnail.load(response.flag)
+        }
+        holder.thumbnail.setOnClickListener { onItemClick.onItemClick(position) }
+    }
+    interface ItemClick{
+        fun onItemClick(position: Int)
     }
 }

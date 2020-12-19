@@ -9,8 +9,9 @@ import kotlinx.android.parcel.IgnoredOnParcel
 import kotlinx.android.parcel.Parcelize
 import kotlinx.android.parcel.RawValue
 
-@Parcelize
+
 @Entity
+@Parcelize
 data class CountryDetails(
     @ColumnInfo(name = "area")
     @SerializedName("area")
@@ -30,51 +31,48 @@ data class CountryDetails(
     @ColumnInfo(name = "alpha2Code")
     @SerializedName("alpha2Code")
     val alpha2Code: String? = null,
-    @ColumnInfo(name = "borders")
-    @SerializedName("borders")
-    val borders: List<String?>? = null,
+
+
     @ColumnInfo(name = "subregion")
     @SerializedName("subregion")
     val subregion: String? = null,
-    @ColumnInfo(name = "callingCodes")
-    @SerializedName("callingCodes")
-    val callingCodes: List<String?>? = null,
+
+
     @ColumnInfo(name = "gini")
     @SerializedName("gini")
     val gini: Double? = null,
+
     @ColumnInfo(name = "population")
     @SerializedName("population")
     val population: Double? = null,
+
     @ColumnInfo(name = "numericCode")
     @SerializedName("numericCode")
     val numericCode: String? = null,
+
     @ColumnInfo(name = "alpha3Code")
     @SerializedName("alpha3Code")
     val alpha3Code: String? = null,
-    @ColumnInfo(name = "topLevelDomain")
-    @SerializedName("topLevelDomain")
-    val topLevelDomain: List<String?>? = null,
-    @ColumnInfo(name = "timezones")
-    @SerializedName("timezones")
-    val timezones: List<String?>? = null,
+
+
+
     @ColumnInfo(name = "cioc")
     @SerializedName("cioc")
     val cioc: String? = null,
+
     @ColumnInfo(name = "name")
     @SerializedName("name")
     val name: String? = null,
-    @ColumnInfo(name = "altSpellings")
-    @SerializedName("altSpellings")
-    val altSpellings: List<String?>? = null,
+
+
     @ColumnInfo(name = "region")
     @SerializedName("region")
-    val region: String? = null,
-    @ColumnInfo(name = "latlng")
-    @SerializedName("latlng")
-    val latlng: List<Double?>? = null
-) : Parcelable{
+    val region: String? = null
+
+) : Parcelable {
     @IgnoredOnParcel
-    @PrimaryKey(autoGenerate = true) var sNum:Int = 0
+    @PrimaryKey(autoGenerate = true)
+    var sNum: Int = 0
 }
 
 

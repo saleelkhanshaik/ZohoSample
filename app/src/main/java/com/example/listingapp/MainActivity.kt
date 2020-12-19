@@ -19,18 +19,17 @@ import com.example.listingapp.model.ApixuWeatherResponse
 import com.example.listingapp.model.CountryDetails
 import com.example.listingapp.viewmodel.ListViewModel
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
+import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
 
-class MainActivity : AppCompatActivity(),CoroutineScope {
+class MainActivity : AppCompatActivity(),CoroutineScope,CountryListAdapter.ItemClick {
     private lateinit var job :Job
     private lateinit var listViewModel:ListViewModel
     private val TAG ="MainActivity"
     override val coroutineContext: CoroutineContext
         get() = job+Dispatchers.Main
     private val PERMISSION_SEND_SMS = 320
+    private var data =ArrayList<CountryDetails>()
     override fun onDestroy() {
         super.onDestroy()
         job.cancel()
@@ -44,10 +43,12 @@ class MainActivity : AppCompatActivity(),CoroutineScope {
         listViewModel.countryList.observe(this, Observer {
             Log.d(TAG, "countryList: "+it.size)
             updateAdapter(it)
+            //data= it as ArrayList<CountryDetails>;
         })
         listViewModel.weatherReport.observe(this, Observer {
                 updateweatherCard(it)
         })
+
     }
 
     private fun updateweatherCard(it: ApixuWeatherResponse?) {
@@ -108,13 +109,14 @@ class MainActivity : AppCompatActivity(),CoroutineScope {
             }
     }
     private fun updateAdapter(it: List<CountryDetails>) {
+        data = it as ArrayList<CountryDetails>
         if(it.isNotEmpty()){
             progressBar.visibility=View.GONE
             nodataa.visibility=View.GONE
             recyclerView.visibility=View.VISIBLE
             recyclerView.apply {
                 layoutManager = GridLayoutManager(this@MainActivity,2)
-                adapter = CountryListAdapter(this@MainActivity, it)
+                adapter = CountryListAdapter(this@MainActivity, it,this@MainActivity)
             }
         }else{
             recyclerView.visibility=View.GONE
@@ -122,5 +124,18 @@ class MainActivity : AppCompatActivity(),CoroutineScope {
             nodataa.visibility=View.VISIBLE
         }
 
+    }
+
+    override fun onItemClick(position: Int) {
+        val countryInfo = data[position]
+        val fragmentTransaction = supportFragmentManager.beginTransaction()
+        fragmentTransaction.addToBackStack(null)
+        fragmentTransaction.add(R.id.container,BlankFragment.newInstance(
+            countryInfo.flag!!,
+        countryInfo.name!!,
+        countryInfo.capital!!,
+        countryInfo.population!!.toString(),
+        countryInfo.numericCode!!),"countryDetails")
+        fragmentTransaction.commit()
     }
 }
