@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Listing App</string>
+    <string name="search">Search..</string>
+    <string name="WEATHER_API_KEY">6b5d19e6796e9b6e36ce0015afe42849</string>
+<!--    //http://api.weatherstack.com/current?access_key=6b5d19e6796e9b6e36ce0015afe42849&%20query=Chennai-->
+    <string name="nodata">no data available</string>
+    <string name="temp">%1$s °</string>
+</resources>
