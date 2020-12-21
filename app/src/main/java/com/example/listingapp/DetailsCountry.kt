@@ -60,7 +60,7 @@ class DetailsCountry : Fragment() {
         name.text = this.getString(R.string.CountryName,param2)
         capital.text = this.getString(R.string.capital,param3)
         population.text = this.getString(R.string.region,param4)
-        numericCode.text = this.getString(R.string.area,param4)
+        numericCode.text = this.getString(R.string.area,param5)
     }
     companion object {
 
