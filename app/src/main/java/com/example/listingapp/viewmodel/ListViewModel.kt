@@ -49,8 +49,6 @@ class ListViewModel:ViewModel() {
 
     fun searchDetails(queryString:String):MutableLiveData<List<CountryDetails>>{
         countryList = MutableLiveData()
-//        val list = allCountryList.value?.toMutableList()
-//        countryList.postValue(list?.filter { it.name!!.contains(queryString.trim(),ignoreCase = true) })
         homeModel.searchCountryAPI(object :ApiResponseListener{
             override fun onFailure(onFailure: String) {
 

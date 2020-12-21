@@ -45,9 +45,9 @@ class CountryListAdapter(private val context:Context,
             add(SvgDecoder(context))
         }.build()
         Coil.setImageLoader(imageLoader)
-        if(!response.flag!!.contains("aut")){
+//        if(!response.flag!!.contains("aut")){
             holder.thumbnail.load(response.flag)
-        }
+//        }
         holder.thumbnail.setOnClickListener { onItemClick.onItemClick(position) }
     }
     interface ItemClick{

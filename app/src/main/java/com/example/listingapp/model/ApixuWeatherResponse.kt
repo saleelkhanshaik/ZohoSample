@@ -67,16 +67,16 @@ data class Current(
 	val cloudcover: Int? = null,
 
 	@field:SerializedName("precip")
-	val precip: Int? = null,
+	val precip: Double? = null,
 
 	@field:SerializedName("uv_index")
-	val uvIndex: Int? = null,
+	val uvIndex: Double? = null,
 
 	@field:SerializedName("temperature")
-	val temperature: Int? = null,
+	val temperature: Double? = null,
 
 	@field:SerializedName("humidity")
-	val humidity: Int? = null,
+	val humidity: Double? = null,
 
 	@field:SerializedName("wind_speed")
 	val windSpeed: Int? = null,
