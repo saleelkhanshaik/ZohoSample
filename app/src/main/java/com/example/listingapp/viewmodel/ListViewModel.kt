@@ -1,58 +1,70 @@
 package com.example.listingapp.viewmodel
 
-import android.app.Application
-import android.content.Context
 import androidx.lifecycle.*
-import com.example.listingapp.model.ApixuWeatherResponse
-import com.example.listingapp.model.CountryDetails
-import com.example.listingapp.model.RetrofitAPI
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import com.example.listingapp.Util
-import com.example.listingapp.roomdata.AppDatabase
+import com.example.listingapp.model.*
 
-class ListViewModel:BaseViewModel() {
+class ListViewModel:ViewModel() {
     private val TAG ="ListViewModel"
-    val countryList:LiveData<List<CountryDetails>> = MutableLiveData<List<CountryDetails>>()
+
     val weatherReport:LiveData<ApixuWeatherResponse> = MutableLiveData<ApixuWeatherResponse>()
+    private lateinit var allCountryList: MutableLiveData<List<CountryDetails>>
+    private lateinit var countryList: MutableLiveData<List<CountryDetails>>
+    private lateinit var weatherDetails :MutableLiveData<ApixuWeatherResponse>
+    //country API
+    //weather API
+    //room-db store
+    private var homeModel: HomeModel = HomeModel()
+    fun getCountryDetails():MutableLiveData<List<CountryDetails>>{
+        allCountryList = MutableLiveData()
+        homeModel.callCountryAPI(object : ApiResponseListener{
+            override fun onSuccess(apiResponse: List<*>) {
+                allCountryList.postValue(apiResponse as List<CountryDetails>)
+            }
 
-    init {
-        viewModelScope.launch {
-            weatherReport as MutableLiveData
-            countryList as MutableLiveData
-//            Util.BASE_URL = "http://api.weatherstack.com/"
-            //weatherReport.value = getWeatherData()
-            Util.BASE_URL = "https://restcountries.eu/"
-//            countryList.value =  countryDetailsAPI()
-//            loadToDatabase(countryDetailsAPI()!!)
-//            countryList.value = loadFromDatabase()
-//            countryList.value = loadFromDatabaseQuery("ind")
-        }
+            override fun onFailure(onFailure: String) {
+            }
+
+            override fun onError(onError: String) {
+            }
+        })
+        return allCountryList
+    }
+    fun getWeatherDetails(queryString:String):MutableLiveData<ApixuWeatherResponse>{
+        weatherDetails  = MutableLiveData()
+        homeModel.callWeatherDetails(object :ApiResponseListener{
+            override fun onFailure(onFailure: String) {
+
+            }
+
+            override fun onError(onError: String) {
+
+            }
+
+            override fun onSuccess(apiResponse: ApixuWeatherResponse?) {
+                weatherDetails.value = apiResponse
+            }
+        },queryString)
+        return weatherDetails
     }
 
-     suspend fun getWeatherData() : ApixuWeatherResponse? {
-      return withContext(Dispatchers.IO){
-          RetrofitAPI().getWeatherReport("CHENNAI").body()
-      }
-    }
-     suspend fun loadToDatabase(countryList: List<CountryDetails>,context: Context) {
-        AppDatabase.invoke(context.applicationContext).countryDao().insertAll(*countryList.toTypedArray())
-    }
-     suspend fun loadFromDatabase(context: Context):List<CountryDetails>? {
-        return withContext(Dispatchers.IO){
-            AppDatabase.invoke(context.applicationContext).countryDao().getAll()
-        }
-    }
-     suspend fun loadFromDatabaseQuery( name:String,context: Context):List<CountryDetails>? {
-        return withContext(Dispatchers.IO){
-            AppDatabase.invoke(context.applicationContext).countryDao().loadByName(name)
-        }
-    }
-     suspend fun countryDetailsAPI ():List<CountryDetails>?{
-      return withContext(Dispatchers.IO){
-            RetrofitAPI().getDetails().body()
-      }
-    }
+    fun searchDetails(queryString:String):MutableLiveData<List<CountryDetails>>{
+        countryList = MutableLiveData()
+//        val list = allCountryList.value?.toMutableList()
+//        countryList.postValue(list?.filter { it.name!!.contains(queryString.trim(),ignoreCase = true) })
+        homeModel.searchCountryAPI(object :ApiResponseListener{
+            override fun onFailure(onFailure: String) {
 
+            }
+
+            override fun onError(onError: String) {
+
+            }
+
+            override fun onSuccess(apiResponse: List<*>) {
+                countryList.value
+                countryList.postValue(apiResponse as List<CountryDetails>)
+            }
+        },queryString)
+        return countryList
+    }
 }

@@ -18,8 +18,8 @@ import com.example.listingapp.model.CountryDetails
 import kotlinx.android.synthetic.main.countrylistitem.view.*
 
 class CountryListAdapter(private val context:Context,
-                         private val coutryList:List<CountryDetails>,
                         private val onItemClick:ItemClick):RecyclerView.Adapter<CountryListAdapter.ChildHolder>() {
+     val coutryList:MutableList<CountryDetails> = mutableListOf()
     class ChildHolder(view:View):RecyclerView.ViewHolder(view){
         val thumbnail = view.thumbnail as AppCompatImageView
         val title = view.title  as TextView
