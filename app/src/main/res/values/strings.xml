@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Listing App</string>
+    <string name="app_name">World</string>
     <string name="search">Search..</string>
     <string name="WEATHER_API_KEY">6b5d19e6796e9b6e36ce0015afe42849</string>
     <!--    //http://api.weatherstack.com/current?access_key=6b5d19e6796e9b6e36ce0015afe42849&%20query=Chennai-->
@@ -12,4 +12,8 @@
     <string name="askme">Ask me</string>
     <string name="notme">Not now</string>
     <string name="welcome">Welcome..</string>
+    <string name="CountryName">Country Name: %1$s</string>
+    <string name="capital">Capital: %1$s</string>
+    <string name="region">Region: %1$s</string>
+    <string name="area">Area: %1$s</string>
 </resources>

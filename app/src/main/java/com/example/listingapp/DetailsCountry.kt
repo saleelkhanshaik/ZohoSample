@@ -12,21 +12,16 @@ import coil.decode.SvgDecoder
 import coil.load
 import kotlinx.android.synthetic.main.fragment_blank.*
 
-// TODO: Rename parameter arguments, choose names that match
+
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "imageURL"
 private const val ARG_PARAM2 = "name"
 private const val ARG_PARAM3 = "capital"
-private const val ARG_PARAM4 = "population"
-private const val ARG_PARAM5 = "numericCode"
+private const val ARG_PARAM4 = "region"
+private const val ARG_PARAM5 = "area"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [BlankFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class BlankFragment : Fragment() {
-    // TODO: Rename and change types of parameters
+
+class DetailsCountry : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
     private var param3: String? = null
@@ -48,7 +43,6 @@ class BlankFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_blank, container, false)
     }
 
@@ -63,25 +57,17 @@ class BlankFragment : Fragment() {
         }.build()
         Coil.setImageLoader(imageLoader)
         imgurl.load(param1)
-        name.text = param2
-        capital.text = param3
-        population.text = param4
-        numericCode.text = param5
+        name.text = this.getString(R.string.CountryName,param2)
+        capital.text = this.getString(R.string.capital,param3)
+        population.text = this.getString(R.string.region,param4)
+        numericCode.text = this.getString(R.string.area,param4)
     }
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment BlankFragment.
-         */
-        // TODO: Rename and change types and number of parameters
+
         @JvmStatic
         fun newInstance(param1: String, param2: String,param3: String,
         param4: String,param5: String) =
-            BlankFragment().apply {
+            DetailsCountry().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)

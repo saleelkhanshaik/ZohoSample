@@ -31,40 +31,27 @@ data class CountryDetails(
     @ColumnInfo(name = "alpha2Code")
     @SerializedName("alpha2Code")
     val alpha2Code: String? = null,
-
-
     @ColumnInfo(name = "subregion")
     @SerializedName("subregion")
     val subregion: String? = null,
-
-
     @ColumnInfo(name = "gini")
     @SerializedName("gini")
     val gini: Double? = null,
-
     @ColumnInfo(name = "population")
     @SerializedName("population")
     val population: Double? = null,
-
     @ColumnInfo(name = "numericCode")
     @SerializedName("numericCode")
     val numericCode: String? = null,
-
     @ColumnInfo(name = "alpha3Code")
     @SerializedName("alpha3Code")
     val alpha3Code: String? = null,
-
-
-
     @ColumnInfo(name = "cioc")
     @SerializedName("cioc")
     val cioc: String? = null,
-
     @ColumnInfo(name = "name")
     @SerializedName("name")
     val name: String? = null,
-
-
     @ColumnInfo(name = "region")
     @SerializedName("region")
     val region: String? = null

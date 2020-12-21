@@ -12,11 +12,8 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
-import coil.load
-import com.example.listingapp.model.ApixuWeatherResponse
 import com.example.listingapp.model.CountryDetails
 import com.example.listingapp.viewmodel.ListViewModel
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_list.*
 
 

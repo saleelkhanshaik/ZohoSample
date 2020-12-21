@@ -22,21 +22,12 @@ import com.example.listingapp.viewmodel.ListViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
-
     private val TAG = "MainActivity"
-    private val PERMISSION_SEND_SMS = 320
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         showSplashScreenAnimation()
     }
-
-
-
-
-
 
     private fun showSplashScreenAnimation() {
         val fragment = supportFragmentManager.beginTransaction()
@@ -57,12 +48,12 @@ class MainActivity : AppCompatActivity() {
         val fragmentTransaction = supportFragmentManager.beginTransaction()
         fragmentTransaction.addToBackStack(null)
         fragmentTransaction.replace(
-                R.id.maincontainer, BlankFragment.newInstance(
+                R.id.maincontainer, DetailsCountry.newInstance(
                 countryInfo.flag!!,
                 countryInfo.name!!,
                 countryInfo.capital!!,
-                countryInfo.population!!.toString(),
-                countryInfo.numericCode!!
+                countryInfo.region!!.toString(),
+                countryInfo.area!!.toString()
         ), "countryDetails"
         )
         fragmentTransaction.commit()

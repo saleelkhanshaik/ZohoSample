@@ -36,18 +36,11 @@ class CountryListAdapter(private val context:Context,
     override fun onBindViewHolder(holder: ChildHolder, position: Int) {
         val response = coutryList[position]
         holder.title.text = response.name
-
-
-
-//            holder.thumbnail.load("https://restcountries.eu/data/aut.svg")
-
         val imageLoader = ImageLoader.Builder(context).componentRegistry {
             add(SvgDecoder(context))
         }.build()
         Coil.setImageLoader(imageLoader)
-//        if(!response.flag!!.contains("aut")){
             holder.thumbnail.load(response.flag)
-//        }
         holder.thumbnail.setOnClickListener { onItemClick.onItemClick(position) }
     }
     interface ItemClick{

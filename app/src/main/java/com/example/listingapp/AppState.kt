@@ -2,7 +2,6 @@ package com.example.listingapp
 
 import android.app.Application
 import com.example.listingapp.roomdata.AppDatabase
-import com.facebook.stetho.Stetho
 
 class AppState:Application() {
     companion object{
@@ -11,6 +10,6 @@ class AppState:Application() {
     override fun onCreate() {
         super.onCreate()
         appDatabase = AppDatabase.invoke(applicationContext)
-        Stetho.initializeWithDefaults(this)
+//        Stetho.initializeWithDefaults(this)
     }
 }
