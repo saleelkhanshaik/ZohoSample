@@ -66,7 +66,7 @@ dependencies {
     // LiveData
     implementation "androidx.lifecycle:lifecycle-livedata:$lifecycle_version"
 
-    //Kotlin Coroutines
+    //Kotlin Coroutines --123
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.1"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.1"
 //    implementation 'com.facebook.stetho:stetho:1.5.1'
